@@ -225,9 +225,10 @@ var assemblies = [
       { "name": "Backend.DataContext.KioscoContext", "rp": "Backend_KioscoContext.html", "cl": 244, "ucl": 10, "cal": 254, "tl": 314, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Backend.WeatherForecast", "rp": "Backend_WeatherForecast.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "KioscoInformaticoBackend.Migrations.agregamosImagenAProductos", "rp": "Backend_agregamosImagenAProductos.html", "cl": 0, "ucl": 732, "cal": 732, "tl": 797, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "KioscoInformaticoBackend.Migrations.Inicial", "rp": "Backend_Inicial.html", "cl": 0, "ucl": 705, "cal": 705, "tl": 765, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "KioscoInformaticoBackend.Migrations.inicio", "rp": "Backend_inicio.html", "cl": 0, "ucl": 977, "cal": 977, "tl": 1066, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "KioscoInformaticoBackend.Migrations.KioscoContextModelSnapshot", "rp": "Backend_KioscoContextModelSnapshot.html", "cl": 0, "ucl": 665, "cal": 665, "tl": 701, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Program", "rp": "Backend_Program.html", "cl": 0, "ucl": 41, "cal": 41, "tl": 67, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "Backend_Program.html", "cl": 0, "ucl": 43, "cal": 43, "tl": 79, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "Service",
