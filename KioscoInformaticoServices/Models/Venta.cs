@@ -14,9 +14,6 @@ public partial class Venta
     public FormaDePagoEnum FormaPago { get; set; }
 
 
-
-
-
     public decimal Iva { get; set; }
 
     public decimal Total { get; set; }

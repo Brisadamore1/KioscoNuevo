@@ -28,9 +28,9 @@ namespace Service.Services
             _endpoint = urlApi + ApiEndpoints.GetEndpoint(typeof(T).Name);
         }
 
-        public async Task<List<T>?> GetAllAsync()
+        public async Task<List<T>?> GetAllAsync(string? filtro = "")
         {
-            var response = await client.GetAsync(_endpoint);
+            var response = await client.GetAsync($"{_endpoint}?filtro={filtro}");
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {

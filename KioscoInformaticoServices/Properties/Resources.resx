@@ -121,7 +121,7 @@
     <value>https://datakioscoale.azurewebsites.net/api/</value>
   </data>
   <data name="Remoto" xml:space="preserve">
-    <value>false</value>
+    <value>true</value>
   </data>
   <data name="UrlApiLocal" xml:space="preserve">
     <value>https://localhost:7238/api/</value>

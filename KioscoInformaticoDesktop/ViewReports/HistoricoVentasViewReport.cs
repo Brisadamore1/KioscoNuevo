@@ -31,7 +31,7 @@ namespace KioscoInformaticoDesktop.ViewReports
 
         private void HistoricoVentasViewReport_Load(object sender, EventArgs e)
         {
-            reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.HistoricoVentasReport.rdlc";
+            reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.HistoricoVentasReport.rdlc";
             //construyo un Datatable con los datos de la venta
 
             //armamos la lista de ventas para el reporte

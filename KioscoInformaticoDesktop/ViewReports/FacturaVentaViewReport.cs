@@ -38,7 +38,7 @@ namespace KioscoInformaticoDesktop.ViewReports
 
         private void FacturaVentaViewReport_Load(object sender, EventArgs e)
         {
-            reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.FacturaVentaReport.rdlc";
+            reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.FacturaVentaReport.rdlc";
             //construyo un Datatable con los datos de la venta
 
             

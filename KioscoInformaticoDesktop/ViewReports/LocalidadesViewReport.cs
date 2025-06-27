@@ -1,6 +1,7 @@
-﻿using Service.Services;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using Service.Interfaces;
+using Service.Models;
+using Service.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace KioscoInformaticoDesktop.ViewReports
     public partial class LocalidadesViewReport : Form
     {
         ReportViewer reporte;
-        ILocalidadService localidadService = new LocalidadService();
+        IGenericService<Localidad> localidadService = new GenericService<Localidad>();
         public LocalidadesViewReport()
         {
             InitializeComponent();
@@ -29,8 +30,8 @@ namespace KioscoInformaticoDesktop.ViewReports
 
         private async void LocalidadesViewReport_Load(object sender, EventArgs e)
         {
-            reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.LocalidadesReport.rdlc";
-            var localidades = await localidadService.GetAllAsync();
+            reporte.LocalReport.ReportEmbeddedResource = "Desktop.Reports.LocalidadesReport.rdlc";
+            var localidades = await localidadService.GetAllAsync(string.Empty);
             reporte.LocalReport.DataSources.Add(new ReportDataSource("DSLocalidades", localidades));
             reporte.SetDisplayMode(DisplayMode.PrintLayout);
             reporte.RefreshReport();

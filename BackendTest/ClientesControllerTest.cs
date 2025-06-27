@@ -3,10 +3,11 @@ using Backend.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Service.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,11 +62,11 @@ namespace Backend.Tests
 
 
         [Theory]
-        [InlineData(1,"Juan Pérez")]
+        [InlineData(1, "Juan Pérez")]
         [InlineData(2, "María López")]
         public async void GetCliente_JuanPerez_y_Maria_Lopez(int idGet, string valueExpect)
         {
-                using (var context = new KioscoContext(options))
+            using (var context = new KioscoContext(options))
             {
                 context.Database.EnsureCreated();
                 var clientesController = new ClientesController(context);
@@ -228,18 +229,168 @@ namespace Backend.Tests
         [Fact]
         public async void PutCliente_ArgumentNullException()
         {
-           //*** Arrange
-           // Crear la base de datos y aplicar las migraciones
-           using (var context = new KioscoContext(options))
+            //*** Arrange
+            // Crear la base de datos y aplicar las migraciones
+            using (var context = new KioscoContext(options))
             {
-               context.Database.EnsureCreated();
-               var clientesController = new ClientesController(context);
-               //***ACT
+                context.Database.EnsureCreated();
+                var clientesController = new ClientesController(context);
+                //***ACT
                 //verifico que el resultado sea de tipo ArgumentNullException
                 await Assert.ThrowsAsync<ArgumentNullException>(async () => await clientesController.PutCliente(1, null));
-           }
+            }
             // Cerrar la conexión al finalizar
             connection.Close();
+        }
+
+        [Fact]
+        public async void DeleteCliente_NotFound_Mock()
+        {
+            //Arrange
+            var context = new Mock<KioscoContext>(options);
+            context.Setup(c => c.Clientes.FindAsync(It.IsAny<int?>())).ReturnsAsync((Cliente)null);
+            var clientesController = new ClientesController(context.Object);
+            //Act
+            var result = await clientesController.DeleteCliente(1000);
+            //Assert
+            //Verifico que el resultado sea NotFound
+            Assert.IsType<NotFoundResult>(result);
+
+
+        }
+        [Fact]
+        public async void DeleteCliente_Id_1()
+        {
+            //*** Arrange
+            // Crear la base de datos y aplicar las migraciones
+            using (var context = new KioscoContext(options))
+            {
+                context.Database.EnsureCreated();
+                var clientesController = new ClientesController(context);
+                //***ACT
+                var result = await clientesController.DeleteCliente(1);
+                //***ASSERT
+                //verifico que el resultado no sea nulo
+                Assert.NotNull(result);
+                //verifico que el resultado sea de tipo NotFoundResult
+                Assert.IsType<NoContentResult>(result);
+            }
+            // Cerrar la conexión al finalizar
+            connection.Close();
+        }
+
+        [Fact]
+        public async void PostCliente()
+        {
+            //*** Arrange
+            // Crear la base de datos y aplicar las migraciones
+            using (var context = new KioscoContext(options))
+            {
+                context.Database.EnsureCreated();
+                var clientesController = new ClientesController(context);
+                var cliente = new Cliente()
+                {
+
+                    Nombre = "Juan Fernandez",
+                    Direccion = "Av. Rivadavia 1234",
+                    Telefonos = "011-12345678",
+                    FechaNacimiento = new DateTime(1990, 1, 1),
+                    LocalidadId = 1,
+                    Eliminado = false
+                };
+                //***ACT
+                var result = await clientesController.PostCliente(cliente);
+                //***ASSERT
+                //verifico que el resultado no sea nulo
+                Assert.NotNull(result);
+                //verifico que el resultado sea de tipo NotFoundResult
+                Assert.IsType<CreatedAtActionResult>(result.Result);
+            }
+            // Cerrar la conexión al finalizar
+            connection.Close();
+        }
+
+        [Fact]
+        public async void PutCliente()
+        {
+            //*** Arrange
+            // Crear la base de datos y aplicar las migraciones
+            using (var context = new KioscoContext(options))
+            {
+                context.Database.EnsureCreated();
+                var clientesController = new ClientesController(context);
+                var cliente = new Cliente()
+                {
+                    Id = 1,
+                    Nombre = "Monica Mellano",
+                    Direccion = "Av. Rivadavia 1234",
+                    Telefonos = "011-12345678",
+                    FechaNacimiento = new DateTime(1990, 1, 1),
+                    LocalidadId = 1,
+                    Eliminado = false
+                };
+                //***ACT
+                var result = await clientesController.PutCliente(1, cliente);
+                //***ASSERT
+                //verifico que el resultado no sea nulo
+                Assert.NotNull(result);
+                //verifico que el resultado sea de tipo NotFoundResult
+                Assert.IsType<NoContentResult>(result);
+            }
+            // Cerrar la conexión al finalizar
+            connection.Close();
+        }
+
+        [Fact]
+        public async void PutCliente_BadRequest()
+        {
+            //*** Arrange
+            // Crear la base de datos y aplicar las migraciones
+            using (var context = new KioscoContext(options))
+            {
+                context.Database.EnsureCreated();
+                var clientesController = new ClientesController(context);
+                var cliente = new Cliente()
+                {
+                    Id = 1,
+                    Nombre = "Juan Perez",
+                    Direccion = "Av. Rivadavia 1234",
+                    Telefonos = "011-12345678",
+                    FechaNacimiento = new DateTime(1990, 1, 1),
+                    LocalidadId = 1,
+                    Eliminado = false
+                };
+                //***ACT
+                var result = await clientesController.PutCliente(1000, cliente);
+                //***ASSERT
+                //verifico que el resultado no sea nulo
+                Assert.NotNull(result);
+                //verifico que el resultado sea de tipo NotFoundResult
+                Assert.IsType<BadRequestResult>(result);
+            }
+            // Cerrar la conexión al finalizar
+            connection.Close();
+        }
+
+        [Fact]
+        public async void PutCliente_DbUpdateConcurrencyException()
+        {
+            //Arrange
+            var context = new Mock<KioscoContext>(options);
+            context.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new DbUpdateConcurrencyException());
+
+            //Seteamos que clientes.any devuelva true con cualquier tipo de parametro
+            context.Setup(c => c.Clientes.Any(It.IsAny<Expression<Func<Cliente, bool>>>()))
+    .Returns(false);
+
+            var clientesController = new ClientesController(context.Object);
+            var cliente = new Cliente();
+            //Act
+            var result = await clientesController.PutCliente(1, cliente);
+            Assert.NotNull(result);
+            Assert.IsType<DbUpdateConcurrencyException>(result);
+
+            Assert.IsType<NotFoundResult>(result);
         }
     }
 }

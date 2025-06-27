@@ -1,5 +1,5 @@
 ﻿@page "/nuevoeditarcliente"
-@inject IClienteService ClienteService
+@inject IGenericService<Cliente> ClienteService
 @inject IGenericService<Localidad> LocalidadService
 @inject NavigationManager NavigationManager
 @inject SweetAlertService SweetAlert
@@ -64,7 +64,7 @@ else
         {
              cliente = new Cliente();
         }
-        localidades = await LocalidadService.GetAllAsync();
+        localidades = await LocalidadService.GetAllAsync(string.Empty);
     }
 
 

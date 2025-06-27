@@ -1,6 +1,7 @@
 ﻿using Desktop.ExtensionMethods;
 using KioscoInformaticoDesktop.ViewReports;
 using Service.Enums;
+using Service.Interfaces;
 using Service.Models;
 using Service.Services;
 using System;
@@ -18,7 +19,8 @@ namespace KioscoInformaticoDesktop.Views
 {
     public partial class VentasView : Form
     {
-        ClienteService clienteService = new ClienteService();
+        IGenericService<Venta> clienteService = new GenericService<Venta>();
+
         ProductoService productoService = new ProductoService();
         GenericService<Venta> ventaService = new GenericService<Venta>();
         Venta venta = new Venta();
@@ -33,7 +35,7 @@ namespace KioscoInformaticoDesktop.Views
         {
             #region carga de combos
             await Task.WhenAll(
-                Task.Run(async () => comboBoxClientes.DataSource = await clienteService.GetAllAsync()),
+                Task.Run(async () => comboBoxClientes.DataSource = await clienteService.GetAllAsync(string.Empty)),
                 Task.Run(async () => comboBoxProductos.DataSource = await productoService.GetAllAsync())
             );
             comboBoxClientes.DisplayMember = "Nombre";

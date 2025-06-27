@@ -32,9 +32,10 @@
             // 
             // LocalidadesViewReport
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(847, 450);
+            ClientSize = new Size(678, 482);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "LocalidadesViewReport";
             Text = "Listado de localidades";
             Load += LocalidadesViewReport_Load;

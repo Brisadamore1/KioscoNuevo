@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label1 = new Label();
             tabControl = new TabControl();
@@ -59,8 +59,9 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.BackColor = Color.DeepSkyBlue;
+            panel1.BackColor = Color.Tan;
             panel1.Controls.Add(label1);
+            panel1.ForeColor = Color.Black;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
@@ -70,10 +71,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Showcard Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(11, 12);
+            label1.Font = new Font("Copperplate Gothic Bold", 28.2F);
+            label1.ForeColor = Color.Sienna;
+            label1.Location = new Point(352, 9);
             label1.Name = "label1";
-            label1.Size = new Size(221, 43);
+            label1.Size = new Size(313, 53);
             label1.TabIndex = 0;
             label1.Text = "Productos";
             // 
@@ -111,7 +113,7 @@
             // iconButtonSalir
             // 
             iconButtonSalir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iconButtonSalir.BackColor = Color.OrangeRed;
+            iconButtonSalir.BackColor = Color.Sienna;
             iconButtonSalir.ForeColor = Color.White;
             iconButtonSalir.IconChar = FontAwesome.Sharp.IconChar.Close;
             iconButtonSalir.IconColor = Color.White;
@@ -126,11 +128,12 @@
             iconButtonSalir.Text = "&Salir";
             iconButtonSalir.TextAlign = ContentAlignment.MiddleRight;
             iconButtonSalir.UseVisualStyleBackColor = false;
+            iconButtonSalir.Click += iconButtonSalir_Click;
             // 
             // BtnBuscar
             // 
             BtnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            BtnBuscar.BackColor = Color.OrangeRed;
+            BtnBuscar.BackColor = Color.Sienna;
             BtnBuscar.ForeColor = Color.White;
             BtnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
             BtnBuscar.IconColor = Color.White;
@@ -161,12 +164,11 @@
             txtFiltro.Name = "txtFiltro";
             txtFiltro.Size = new Size(682, 27);
             txtFiltro.TabIndex = 7;
-            txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
             // iconButtonEliminar
             // 
             iconButtonEliminar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iconButtonEliminar.BackColor = Color.OrangeRed;
+            iconButtonEliminar.BackColor = Color.Sienna;
             iconButtonEliminar.ForeColor = Color.White;
             iconButtonEliminar.IconChar = FontAwesome.Sharp.IconChar.ToiletPortable;
             iconButtonEliminar.IconColor = Color.White;
@@ -186,7 +188,7 @@
             // iconButtonEditar
             // 
             iconButtonEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iconButtonEditar.BackColor = Color.OrangeRed;
+            iconButtonEditar.BackColor = Color.Sienna;
             iconButtonEditar.ForeColor = Color.White;
             iconButtonEditar.IconChar = FontAwesome.Sharp.IconChar.Pencil;
             iconButtonEditar.IconColor = Color.White;
@@ -206,7 +208,7 @@
             // iconButtonAgregar
             // 
             iconButtonAgregar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iconButtonAgregar.BackColor = Color.OrangeRed;
+            iconButtonAgregar.BackColor = Color.Sienna;
             iconButtonAgregar.ForeColor = Color.White;
             iconButtonAgregar.IconChar = FontAwesome.Sharp.IconChar.FileCirclePlus;
             iconButtonAgregar.IconColor = Color.White;
@@ -228,15 +230,15 @@
             dataGridProductosView.AllowUserToDeleteRows = false;
             dataGridProductosView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridProductosView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridProductosView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dataGridProductosView.DefaultCellStyle = dataGridViewCellStyle8;
             dataGridProductosView.Location = new Point(3, 59);
             dataGridProductosView.Margin = new Padding(3, 4, 3, 4);
             dataGridProductosView.Name = "dataGridProductosView";
@@ -341,6 +343,7 @@
             Controls.Add(panel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "ProductosView";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ProductosView";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -358,21 +361,15 @@
 
         private Panel panel1;
         private Label label1;
-        private TabControl tabControl;
-        private TabPage tabPageLista;
         private FontAwesome.Sharp.IconButton btnEliminar;
         private FontAwesome.Sharp.IconButton btnEditar;
         private FontAwesome.Sharp.IconButton btnAgregar;
-        private DataGridView dataGridProductosView;
-        private TabPage tabPageAgregarEditar;
         private FontAwesome.Sharp.IconButton btnCancelar;
         private FontAwesome.Sharp.IconButton btnGuardar;
-        private TextBox txtNombre;
         private Label label2;
         private FontAwesome.Sharp.IconButton iconButtonEliminar;
         private FontAwesome.Sharp.IconButton iconButtonEditar;
         private FontAwesome.Sharp.IconButton iconButtonAgregar;
-        private NumericUpDown numericPrecio;
         private Label txtPrecio;
         private FontAwesome.Sharp.IconButton iconButton1;
         private Label label3;
@@ -380,6 +377,12 @@
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton iconButtonSalir;
         private FontAwesome.Sharp.IconButton BtnBuscar;
-        private TextBox txtFiltro;
+        public TabControl tabControl;
+        public TabPage tabPageLista;
+        public TabPage tabPageAgregarEditar;
+        public TextBox txtNombre;
+        public NumericUpDown numericPrecio;
+        public TextBox txtFiltro;
+        public DataGridView dataGridProductosView;
     }
 }
