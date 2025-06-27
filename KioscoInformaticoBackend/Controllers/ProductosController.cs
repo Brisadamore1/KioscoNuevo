@@ -23,9 +23,11 @@ namespace Backend.Controllers
 
         // GET: api/Productos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos([FromQuery] string? filtro = "")
         {
-            return await _context.Productos.ToListAsync();
+            return await _context.Productos
+               .Where(c => c.Nombre.ToUpper().Contains(filtro.ToUpper()))
+               .ToListAsync();
         }
 
         // GET: api/Productos/5

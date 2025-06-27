@@ -37,9 +37,6 @@ public partial class KioscoContext : DbContext
     public virtual DbSet<Venta> Ventas { get; set; }
 
 
-
-
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -62,12 +59,14 @@ public partial class KioscoContext : DbContext
             new Producto() { Id = 2, Nombre = "Sprite 2lts", Precio = 2450 },
             new Producto() { Id = 3, Nombre = "Fanta 2lts", Precio = 2550 }
             );
+
         //carga de datos semilla de localidades
         modelBuilder.Entity<Localidad>().HasData(
             new Localidad() { Id = 1, Nombre = "San Justo" },
             new Localidad() { Id = 2, Nombre = "Videla" },
             new Localidad() { Id = 3, Nombre = "Escalada" }
             );
+
         //carga de datos semilla de clientes
         modelBuilder.Entity<Cliente>().HasData(
         new Cliente
@@ -116,6 +115,7 @@ public partial class KioscoContext : DbContext
             LocalidadId = 2
         }
         );
+
         //Carga de datos semillas de ventas
         modelBuilder.Entity<Venta>().HasData(
             new Venta()
@@ -130,6 +130,7 @@ public partial class KioscoContext : DbContext
             new Venta() { Id = 2, FormaPago = FormaDePagoEnum.Tarjeta_Credito, Iva = 10, Total = 5000m, ClienteId = 2, Fecha = DateTime.Now },
             new Venta() { Id = 3, FormaPago = FormaDePagoEnum.Tarjeta_Debito, Iva = 21, Total = 8000m, ClienteId = 1, Fecha = DateTime.Now }
         );
+
         //carga de datos semilla de proveedores
         modelBuilder.Entity<Proveedor>().HasData(
         new Proveedor
@@ -233,6 +234,7 @@ public partial class KioscoContext : DbContext
             LocalidadId = 1
         }
     );
+
         //carga de datos semilla de compras
         modelBuilder.Entity<Compra>().HasData(
             new Compra
@@ -272,6 +274,7 @@ public partial class KioscoContext : DbContext
                 ProveedorId = 4
             }
         );
+
         //carga de datos semilla de detalle compra
         modelBuilder.Entity<DetalleCompra>().HasData(
             new DetalleCompra { Id = 1, ProductoId = 1, PrecioUnitario = 2650, Cantidad = 1, CompraId = 1 },

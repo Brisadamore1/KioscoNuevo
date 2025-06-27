@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Backend.DataContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Backend.DataContext;
 using Service.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientesController : ControllerBase
     {
         private readonly KioscoContext _context;
@@ -25,13 +27,8 @@ namespace Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes([FromQuery] string? filtro="")
         {
-            if (filtro != null)
-            {
-                return await _context.Clientes.Include(c => c.Localidad)
-                    .Where(c => c.Nombre.ToUpper().Contains(filtro.ToUpper()))
-                    .ToListAsync();
-            }
-            return await _context.Clientes.Include(c => c.Localidad)
+             return await _context.Clientes.Include(c => c.Localidad)
+                .Where(c => c.Nombre.ToUpper().Contains(filtro.ToUpper()))
                 .ToListAsync();
         }
 
