@@ -28,4 +28,8 @@
     <ProjectReference Include="..\KioscoInformaticoServices\Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Firebase\" />
+  </ItemGroup>
+
 </Project>
