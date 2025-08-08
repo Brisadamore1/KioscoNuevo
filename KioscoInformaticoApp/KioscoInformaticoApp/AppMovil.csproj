@@ -55,6 +55,11 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+        <ItemGroup>
+          <Content Include="Platforms\Windows\icono_inicio.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+          </Content>
+        </ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\cat.png" />

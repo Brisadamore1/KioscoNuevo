@@ -118,12 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UrlApi" xml:space="preserve">
-    <value>https://datakioscoale.azurewebsites.net/api/</value>
+    <value>https://datakioscobri-dccjfnaqaheceqft.brazilsouth-01.azurewebsites.net/api/</value>
   </data>
   <data name="Remoto" xml:space="preserve">
     <value>true</value>
   </data>
   <data name="UrlApiLocal" xml:space="preserve">
     <value>https://localhost:7238/api/</value>
+  </data>
+  <data name="AuthDomainFirebase" xml:space="preserve">
+    <value>kioscoinformatico-943c1.firebaseapp.com</value>
+  </data>
+  <data name="ApiKeyFirebase" xml:space="preserve">
+    <value>AIzaSyCWuLtoHlo41oPDEpedEqoXD_qmwS6x4aY</value>
   </data>
 </root>

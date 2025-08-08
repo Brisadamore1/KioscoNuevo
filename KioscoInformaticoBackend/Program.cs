@@ -1,11 +1,15 @@
+using Backend.Class;
 using Backend.DataContext;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
+
+DotNetEnv.Env.Load(); // Cargar variables de entorno desde el archivo .env
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,10 +40,29 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 #endregion
 
-FirebaseApp.Create(new AppOptions()
+//FirebaseApp.Create(new AppOptions()
+//{
+//    Credential = GoogleCredential.FromFile("Firebase/kioscoinformatico-312f4-firebase-adminsdk-d1tq0-17a0006285.json")
+//});
+
+var firebaseJson = Environment.GetEnvironmentVariable("GOOGLE_CREDENTIALS");
+
+if (string.IsNullOrWhiteSpace(firebaseJson))
 {
-    Credential = GoogleCredential.FromFile("Firebase/kioscoinformatico-312f4-firebase-adminsdk-d1tq0-17a0006285.json")
+    throw new Exception("Falta la variable GOOGLE_CREDENTIALS");
+}
+
+var credential = GoogleCredential.FromJson(firebaseJson);
+
+FirebaseApp.Create(new AppOptions
+{
+    Credential = credential
 });
+
+
+builder.Services
+    .AddAuthentication("Firebase")
+    .AddScheme<AuthenticationSchemeOptions, FirebaseAuthenticationHandler>("Firebase", null);
 
 builder.Services.AddAuthorization();
 
@@ -47,6 +70,7 @@ builder.Services.AddControllers();
 
 var configuration = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json")
+        .AddEnvironmentVariables() // Cargar variables de entorno
         .Build();
 string cadenaConexion = configuration.GetConnectionString("mysqlRemoto");
 

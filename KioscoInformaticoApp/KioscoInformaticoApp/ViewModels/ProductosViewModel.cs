@@ -15,6 +15,7 @@ namespace KioscoInformaticoApp.ViewModels
     public class ProductosViewModel : ObjectNotification
     {
 		private GenericService<Producto> productoService= new GenericService<Producto>();
+
         private string filterProducts;
 
 		public string FilterProducts
@@ -46,7 +47,9 @@ namespace KioscoInformaticoApp.ViewModels
 			OnPropertyChanged();
             }
 		}
+
         private List<Producto>? productosListToFilter;
+
         private Producto? selectedProduct;
 
         public Producto? SelectedProduct
@@ -57,8 +60,6 @@ namespace KioscoInformaticoApp.ViewModels
                 EditarProductoCommand.ChangeCanExecute();
             }
         }
-
-
 
         public Command ObtenerProductosCommand { get; }
         public Command FiltrarProductosCommand { get; }
@@ -113,7 +114,7 @@ namespace KioscoInformaticoApp.ViewModels
             IsRefreshing = true; // Asegúrate de que IsRefreshing se establezca en true al inicio
             productosListToFilter = await productoService.GetAllAsync();
             Productos = new ObservableCollection<Producto>(productosListToFilter);
-            IsRefreshing = false; // Establece IsRefreshing en false al final
+            IsRefreshing = false; // Establece IsRefreshing en false al final cuando llegan los profesionales
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Service.Services
         protected readonly HttpClient client;
         protected readonly JsonSerializerOptions options;
         protected readonly string _endpoint;
+        public static string jwtToken = string.Empty;
 
         public GenericService()
         {
@@ -26,6 +27,11 @@ namespace Service.Services
                 urlApi = Properties.Resources.UrlApiLocal;
 
             _endpoint = urlApi + ApiEndpoints.GetEndpoint(typeof(T).Name);
+
+            if (!string.IsNullOrEmpty(GenericService<object>.jwtToken))
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GenericService<object>.jwtToken);
+            else
+                throw new ArgumentException("Error Token no definido", nameof(GenericService<object>.jwtToken));
         }
 
         public async Task<List<T>?> GetAllAsync(string? filtro = "")
