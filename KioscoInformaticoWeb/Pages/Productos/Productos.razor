@@ -1,61 +1,62 @@
-﻿@page "/productos"
-@inject IGenericService<Producto> ProductoService
-@inject NavigationManager NavigationManager
+﻿@page "/productos"  
+@inject IGenericService<Producto> ProductoService  
+@inject NavigationManager NavigationManager  
 
-<HeaderPage TitlePage="Productos" />
+<HeaderPage TitlePage="Productos" />  
 
-@if (productos == null)
-{
-    <p><em>Obteniendo lista de productos...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var producto in productos)
-            {
-                <tr>
-                    <td>@producto.Id</td>
-                    <td>@producto.Nombre</td>
-                    <td>@producto.Precio.ToString("N2")</td>
-                    <td>
-                        <a href="/editarproducto?idProductoEditado=@producto.Id">Editar</a>
-                    </td>
-                    <td>
-                        <button title="Eliminar" @onclick="()=>Eliminar(producto)" class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+@if (productos == null)  
+{  
+    <p><em>Obteniendo lista de productos...</em></p>  
+}  
+else  
+{  
+    <table class="table">  
+        <thead>  
+            <tr>  
+                <th>Id</th>  
+                <th>Nombre</th>  
+                <th>Precio</th>  
+            </tr>  
+        </thead>  
+        <tbody>  
+            @foreach (var producto in productos)  
+            {  
+                <tr>  
+                    <td>@producto.Id</td>  
+                    <td>@producto.Nombre</td>  
+                    <td>@producto.Precio.ToString("N2")</td>  
+                    <td>  
+                        <a href="/editarproducto?idProductoEditado=@producto.Id">Editar</a>  
+                    </td>  
+                    <td>  
+                        <button title="Eliminar" @onclick="()=>Eliminar(producto)" class="btn btn-danger">Eliminar</button>  
+                    </td>  
+                </tr>  
+            }  
+        </tbody>  
+    </table>  
+}  
 
-<button @onclick="AgregarProducto" class="btn btn-primary">Agregar Producto</button>
+<button @onclick="AgregarProducto" class="btn btn-primary">Agregar Producto</button>  
 
-@code {
-    private List<Producto>? productos;
+@code {  
+    private List<Producto>? productos;  
 
-    protected override async Task OnInitializedAsync()
-    {
-        productos = await ProductoService.GetAllAsync();
-    }
+    protected override async Task OnInitializedAsync()  
+    {  
+        // Pass null as the "filtro" parameter to satisfy the method signature.  
+        productos = await ProductoService.GetAllAsync(null);  
+    }  
 
-    public void AgregarProducto()
-    {
-        NavigationManager.NavigateTo("/agregarproducto");
-    }
+    public void AgregarProducto()  
+    {  
+        NavigationManager.NavigateTo("/agregarproducto");  
+    }  
 
-    public async Task Eliminar(Producto producto)
-    {
-        await ProductoService.DeleteAsync(producto.Id);
-        productos = await ProductoService.GetAllAsync();
-        StateHasChanged();
-    }
+    public async Task Eliminar(Producto producto)  
+    {  
+        await ProductoService.DeleteAsync(producto.Id);  
+        productos = await ProductoService.GetAllAsync(null);  
+        StateHasChanged();  
+    }  
 }

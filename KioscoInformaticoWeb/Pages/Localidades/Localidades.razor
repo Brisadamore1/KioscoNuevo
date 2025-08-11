@@ -47,7 +47,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        localidades = await LocalidadService.GetAllAsync();
+        localidades = await LocalidadService.GetAllAsync(null);
         logger.LogInformation($"Localidades obtenidas {localidades?.Count}");
         
     }
@@ -68,7 +68,7 @@ else
         {
             logger.LogInformation($"Borrando localidad {localidad.Nombre}");
             await LocalidadService.DeleteAsync(localidad.Id);
-            localidades = await LocalidadService.GetAllAsync();
+            localidades = await LocalidadService.GetAllAsync(null);
             StateHasChanged();
         }
     }

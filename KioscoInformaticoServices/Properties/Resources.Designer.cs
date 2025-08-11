@@ -88,7 +88,7 @@ namespace Service.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a https://datakioscobri-dccjfnaqaheceqft.brazilsouth-01.azurewebsites.net/api/.
+        ///   Busca una cadena traducida similar a https://backendkioscobrisa.azurewebsites.net/api/.
         /// </summary>
         public static string UrlApi {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UrlApi" xml:space="preserve">
-    <value>https://datakioscobri-dccjfnaqaheceqft.brazilsouth-01.azurewebsites.net/api/</value>
+    <value>https://backendkioscobrisa.azurewebsites.net/api/</value>
   </data>
   <data name="Remoto" xml:space="preserve">
     <value>true</value>
